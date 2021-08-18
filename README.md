@@ -22,9 +22,6 @@
 <a href="https://www.centos.org/">
   <img src="https://img.shields.io/badge/CentOS-8-green?style=flat&logo=centos" alt="Distribution">
 </a>
-<a href="https://github.com/clouddrove/ansible-role-common/actions/workflows/lint.yml">
-  <img src="https://github.com/clouddrove/ansible-role-common/actions/workflows/lint.yml/badge.svg" alt="Actions">
-</a>
 
 ## Requirements
 
