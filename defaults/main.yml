@@ -1,0 +1,7 @@
+---
+# defaults file for roles/common
+apt_repositories: []
+apt_pkg_install: []
+zsh_theme: fino
+common_user: false
+common_username: vagrant

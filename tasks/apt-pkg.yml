@@ -1,0 +1,19 @@
+---
+- name: dpkg configure on ubuntu
+  command: dpkg --configure -a
+  changed_when: false
+
+- name: add git stable apt_repository on Ubuntu
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items: "{{ apt_repositories }}"
+
+- name: install system packages and utils on ubuntu
+  apt:
+    pkg: ["{{ item }}"]
+    state: "present"
+    update_cache: true
+    cache_valid_time: 5400
+  with_items: "{{ apt_pkg_install }}"
+  changed_when: false
