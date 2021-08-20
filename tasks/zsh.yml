@@ -21,7 +21,7 @@
     version: master
     dest: /usr/local/share/{{ item.dir }}
   with_items:
-    - name: https://github.com/robbyrussell/oh-my-zsh
+    - name: https://github.com/ohmyzsh/ohmyzsh
       dir: oh-my-zsh
     - name: https://github.com/zsh-users/zsh-syntax-highlighting
       dir: zsh-syntax-highlighting
