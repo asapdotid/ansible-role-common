@@ -33,11 +33,15 @@ Available variables are listed below, along with default values (see `defaults/m
 
     apt_repositories: []
 
-Add repository
+Add Debian repository
 
     apt_pkg_install: []
 
-Package install
+Package install (Ubuntu/Debian)
+
+    yum_pkg_install: []
+
+Package install (CentOS)
 
     zsh_theme: fino
 

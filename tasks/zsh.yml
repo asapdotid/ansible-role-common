@@ -1,6 +1,6 @@
 ---
 - name: install git and zsh on Ubuntu
-  apt:
+  ansible.builtin.apt:
     name: ["git", "zsh"]
     state: present
     update_cache: true
@@ -8,7 +8,7 @@
   when: (ansible_facts['distribution'] == "Ubuntu")
 
 - name: install git zsh cento or amazon
-  yum:
+  ansible.builtin.yum:
     name: zsh
     state: present
     update_cache: true
@@ -29,7 +29,7 @@
       dir: zsh-autosuggestions
 
 - name: create conf folder in home directory
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0777
@@ -38,34 +38,34 @@
     - "/usr/local/share/oh-my-zsh/cache/"
 
 - name: deploy .zshrc
-  template:
+  ansible.builtin.template:
     src: config/zshrc.j2
     dest: /usr/local/share/oh-my-zsh/conf/zshrc
     mode: 0777
 
 - name: deploy .extra on Centos
-  template:
+  ansible.builtin.template:
     src: config/extra.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.extra"
     mode: 0777
   when: (ansible_facts['distribution'] == "CentOS")
 
 - name: deploy .bash_profile on Centos
-  template:
+  ansible.builtin.template:
     src: config/bash_profile.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.bash_profile"
     mode: 0777
   when: (ansible_facts['distribution'] == "CentOS")
 
 - name: remove standard zshrc on Centos
-  file:
+  ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     state: absent
   changed_when: false
   when: (ansible_facts['distribution'] == "CentOS")
 
 - name: symlink zshrc on Centos
-  file:
+  ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     src: /usr/local/share/oh-my-zsh/conf/zshrc
     state: link
@@ -74,33 +74,33 @@
   when: (ansible_facts['distribution'] == "CentOS")
 
 - name: set zsh as default shell on Centos
-  shell: "chsh -s $(which zsh) {{ user }}"
+  ansible.builtin.shell: "chsh -s $(which zsh) {{ user }}"
   changed_when: false
   when: (ansible_facts['distribution'] == "CentOS")
 
 - name: deploy .extra on Ubuntu
-  template:
+  ansible.builtin.template:
     src: config/extra.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.extra"
     mode: 0777
   when: (ansible_facts['distribution'] == "Ubuntu")
 
 - name: deploy .bash_profile on Ubuntu
-  template:
+  ansible.builtin.template:
     src: config/bash_profile.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.bash_profile"
     mode: 0777
   when: (ansible_facts['distribution'] == "Ubuntu")
 
 - name: remove standard zshrc on Ubuntu
-  file:
+  ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     state: absent
   changed_when: false
   when: (ansible_facts['distribution'] == "Ubuntu")
 
 - name: symlink zshrc on Ubuntu
-  file:
+  ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     src: /usr/local/share/oh-my-zsh/conf/zshrc
     state: link
@@ -109,6 +109,6 @@
   when: (ansible_facts['distribution'] == "Ubuntu")
 
 - name: set zsh as default shell on Ubuntu
-  shell: "chsh -s $(which zsh) {{ user }}"
+  ansible.builtin.shell: "chsh -s $(which zsh) {{ user }}"
   changed_when: false
   when: (ansible_facts['distribution'] == "Ubuntu")
