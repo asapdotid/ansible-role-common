@@ -1,5 +1,5 @@
 ---
-- name: install git and zsh on Ubuntu
+- name: COMMON | Install git and zsh on Ubuntu
   ansible.builtin.apt:
     name: ["git", "zsh"]
     state: present
@@ -7,14 +7,14 @@
     cache_valid_time: 5400
   when: (ansible_facts['distribution'] == "Ubuntu")
 
-- name: install git zsh cento or amazon
+- name: COMMON | Install git zsh cento or amazon
   ansible.builtin.yum:
     name: zsh
     state: present
     update_cache: true
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: clone oh-my-zsh repo
+- name: COMMON | Clone oh-my-zsh repo
   ansible.builtin.git:
     depth: 1
     repo: "{{ item.name }}"
@@ -28,7 +28,7 @@
     - name: https://github.com/zsh-users/zsh-autosuggestions
       dir: zsh-autosuggestions
 
-- name: create conf folder in home directory
+- name: COMMON | Create conf folder in home directory
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
@@ -37,34 +37,34 @@
     - "/usr/local/share/oh-my-zsh/conf/"
     - "/usr/local/share/oh-my-zsh/cache/"
 
-- name: deploy .zshrc
+- name: COMMON | Deploy .zshrc
   ansible.builtin.template:
     src: config/zshrc.j2
     dest: /usr/local/share/oh-my-zsh/conf/zshrc
     mode: 0777
 
-- name: deploy .extra on Centos
+- name: COMMON | Deploy .extra on Centos
   ansible.builtin.template:
     src: config/extra.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.extra"
     mode: 0777
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: deploy .bash_profile on Centos
+- name: COMMON | Deploy .bash_profile on Centos
   ansible.builtin.template:
     src: config/bash_profile.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.bash_profile"
     mode: 0777
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: remove standard zshrc on Centos
+- name: COMMON | Remove standard zshrc on Centos
   ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     state: absent
   changed_when: false
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: symlink zshrc on Centos
+- name: COMMON | Symlink zshrc on Centos
   ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     src: /usr/local/share/oh-my-zsh/conf/zshrc
@@ -73,33 +73,33 @@
   changed_when: false
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: set zsh as default shell on Centos
+- name: COMMON | Set zsh as default shell on Centos
   ansible.builtin.shell: "chsh -s $(which zsh) {{ user }}"
   changed_when: false
   when: (ansible_facts['distribution'] == "CentOS")
 
-- name: deploy .extra on Ubuntu
+- name: COMMON | Deploy .extra on Ubuntu
   ansible.builtin.template:
     src: config/extra.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.extra"
     mode: 0777
   when: (ansible_facts['distribution'] == "Ubuntu")
 
-- name: deploy .bash_profile on Ubuntu
+- name: COMMON | Deploy .bash_profile on Ubuntu
   ansible.builtin.template:
     src: config/bash_profile.j2
     dest: "{{ home_dir | default('/home/') }}{{ user }}/.bash_profile"
     mode: 0777
   when: (ansible_facts['distribution'] == "Ubuntu")
 
-- name: remove standard zshrc on Ubuntu
+- name: COMMON | Remove standard zshrc on Ubuntu
   ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     state: absent
   changed_when: false
   when: (ansible_facts['distribution'] == "Ubuntu")
 
-- name: symlink zshrc on Ubuntu
+- name: COMMON | Symlink zshrc on Ubuntu
   ansible.builtin.file:
     path: "{{ home_dir | default('/home/') }}{{ user }}/.zshrc"
     src: /usr/local/share/oh-my-zsh/conf/zshrc
@@ -108,7 +108,7 @@
   changed_when: false
   when: (ansible_facts['distribution'] == "Ubuntu")
 
-- name: set zsh as default shell on Ubuntu
+- name: COMMON | Set zsh as default shell on Ubuntu
   ansible.builtin.shell: "chsh -s $(which zsh) {{ user }}"
   changed_when: false
   when: (ansible_facts['distribution'] == "Ubuntu")

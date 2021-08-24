@@ -1,15 +1,15 @@
 ---
-- name: dpkg configure on ubuntu
+- name: COMMON | Dpkg configure on ubuntu
   ansible.builtin.command: dpkg --configure -a
   changed_when: false
 
-- name: add git stable apt_repository on Ubuntu
+- name: COMMON | Add git stable apt_repository on Ubuntu
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   with_items: "{{ apt_repositories }}"
 
-- name: install system packages and utils on ubuntu
+- name: COMMON | Install system packages and utils on ubuntu
   ansible.builtin.apt:
     pkg: ["{{ item }}"]
     state: "present"
