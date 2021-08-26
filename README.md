@@ -29,31 +29,14 @@ None
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
-
-    apt_repositories: []
-
-Add Debian repository
-
-    apt_pkg_install: []
-
-Package install (Ubuntu/Debian)
-
-    yum_pkg_install: []
-
-Package install (CentOS)
-
-    zsh_theme: fino
-
-ZSH Theme
-
-    common_user: false
-
-If another user will setup
-
-    common_username: vagrant
-
-If `common user setup true` it will be use
+| Name               | Default Value | Description                                 |
+| ------------------ | ------------- | ------------------------------------------- |
+| `apt_repositories` | `[]`          | APT add repository.                         |
+| `apt_pkg_install`  | `[]`          | APT packages install.                       |
+| `yum_pkg_install`  | `[]`          | YUM packages install.                       |
+| `zsh_theme`        | `[]`          | Set ZSH theme.                              |
+| `common_user`      | `false`       | Common user for setup zsh: true or false.   |
+| `common_username`  | `root`        | User for setup zsh if `common_user`: `true` |
 
 ## Dependencies
 
