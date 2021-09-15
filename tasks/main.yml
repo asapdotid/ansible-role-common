@@ -1,16 +1,6 @@
 ---
 - import_tasks: apt-pkg.yml
-  when: (ansible_facts['distribution'] == "Ubuntu")
+  when: (ansible_facts['os_family'] == "Debian")
 
 - import_tasks: yum-pkg.yml
-  when: (ansible_facts['distribution'] == "CentOS")
-
-- import_tasks: zsh.yml
-  vars:
-    user: "{{ common_username }}"
-  when: common_user
-
-- import_tasks: zsh.yml
-  vars:
-    user: root
-    home_dir: "/"
+  when: (ansible_facts['os_family'] == "RedHat")

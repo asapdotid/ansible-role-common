@@ -1,17 +1,17 @@
 ---
-- name: COMMON | Dpkg configure on ubuntu
+- name: COMMON | Dpkg configure on Debian family
   ansible.builtin.command: dpkg --configure -a
   changed_when: false
 
-- name: COMMON | Add git stable apt_repository on Ubuntu
+- name: COMMON | Add git stable apt_repository on Debian family
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   with_items: "{{ apt_repositories }}"
 
-- name: COMMON | Install system packages and utils on ubuntu
+- name: COMMON | Install system packages and utils on Debian family
   ansible.builtin.apt:
-    pkg: ["{{ item }}"]
+    pkg: "{{ item }}"
     state: "present"
     update_cache: true
     cache_valid_time: 5400
