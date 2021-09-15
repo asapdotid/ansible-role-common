@@ -3,6 +3,3 @@
 apt_repositories: []
 apt_pkg_install: []
 yum_pkg_install: []
-zsh_theme: fino
-common_user: false
-common_username: root

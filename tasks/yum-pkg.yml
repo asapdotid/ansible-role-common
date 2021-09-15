@@ -1,18 +1,18 @@
 ---
-- name: COMMON | Install epel release on centos
+- name: COMMON | Install epel release on RedHat family
   ansible.builtin.yum:
     name: epel-release
 
-- name: COMMON | Install util-linux-use on centos
+- name: COMMON | Install util-linux-use on RedHat family
   ansible.builtin.yum:
     name: yum-utils
     state: "present"
     update_cache: true
   changed_when: false
 
-- name: COMMON | Install system packages and utils on centos
+- name: COMMON | Install system packages and utils on RedHat family
   ansible.builtin.yum:
-    name: ["{{ item }}"]
+    name: "{{ item }}"
     state: "present"
     update_cache: true
   with_items: "{{ yum_pkg_install }}"
