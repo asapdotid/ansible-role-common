@@ -29,14 +29,11 @@ None
 
 ## Role Variables
 
-| Name               | Default Value | Description                                 |
-| ------------------ | ------------- | ------------------------------------------- |
-| `apt_repositories` | `[]`          | APT add repository.                         |
-| `apt_pkg_install`  | `[]`          | APT packages install.                       |
-| `yum_pkg_install`  | `[]`          | YUM packages install.                       |
-| `zsh_theme`        | `[]`          | Set ZSH theme.                              |
-| `common_user`      | `false`       | Common user for setup zsh: true or false.   |
-| `common_username`  | `root`        | User for setup zsh if `common_user`: `true` |
+| Name               | Default Value | Description           |
+| ------------------ | ------------- | --------------------- |
+| `apt_repositories` | `[]`          | APT add repository.   |
+| `apt_pkg_install`  | `[]`          | APT packages install. |
+| `yum_pkg_install`  | `[]`          | YUM packages install. |
 
 ## Dependencies
 
@@ -46,9 +43,17 @@ None.
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: asapdotid.common }
+```yaml
+- hosts: servers
+  vars:
+    apt_pkg_install:
+      - htop
+      - wget
+      - curl
+
+  roles:
+    - { role: asapdotid.common }
+```
 
 ## License
 
@@ -58,4 +63,4 @@ MIT / BSD
 
 [JogjaScript](https://jogjascript.com)
 
-This role was created in 2021 by [Asapdotid](https://jogjascript.com/).
+This role was created in 2021 by [Asapdotid](https://github.com/asapdotid).
