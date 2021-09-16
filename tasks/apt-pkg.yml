@@ -8,6 +8,7 @@
     repo: "{{ item }}"
     state: present
   with_items: "{{ apt_repositories }}"
+  when: apt_repositories != "{}"
 
 - name: COMMON | Install system packages and utils on Debian family
   ansible.builtin.apt:
